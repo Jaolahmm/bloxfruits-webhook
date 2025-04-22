@@ -1,7 +1,4 @@
-if getgenv().Script_Mode ~= "KaiTun" then
-    return warn("🔒 Script ถูกล็อก — ห้ามรันนอกระบบของ KaiTun")
-end
-
+-- Blox Fruits Webhook Script (v2.1 with Config Support)
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -11,7 +8,7 @@ local webhookURL = config.webhookURL or ""
 local enabled = config.enable or {}
 
 local request = (syn and syn.request) or (http and http.request) or request
-if not request then warn("❌ Executor ไม่รองรับ HTTP Requests") return end
+if not request then warn("Executor does not support HTTP Requests") return end
 
 local function safeGet(folder, key, fallback)
     local item = folder and folder:FindFirstChild(key)
