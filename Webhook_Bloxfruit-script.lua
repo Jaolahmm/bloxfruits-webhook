@@ -45,13 +45,13 @@ local function sendWebhook()
     local data = getPlayerData()
     local fields = {}
 
-    if enabled.name then table.insert(fields, {name = "👤 Username", value = "`" .. data.name .. "`", inline = true}) end
-    if enabled.bounty then table.insert(fields, {name = "🏴 Bounty / Honor", value = "`" .. data.bounty .. "`", inline = true}) end
-    if enabled.level then table.insert(fields, {name = "📈 Level", value = "`" .. data.level .. "`", inline = true}) end
-    if enabled.money then table.insert(fields, {name = "💰 Beli", value = "`" .. data.money .. "`", inline = true}) end
-    if enabled.fragments then table.insert(fields, {name = "💎 Fragments", value = "`" .. data.fragments .. "`", inline = true}) end
-    if enabled.race then table.insert(fields, {name = "🧬 Race", value = "`" .. data.race .. "`", inline = true}) end
-    if enabled.fruit then table.insert(fields, {name = "🍎 Devil Fruit", value = "`" .. data.fruit .. "`", inline = true}) end
+    if enabled.name then table.insert(fields, {name = "Username", value = "`" .. data.name .. "`", inline = true}) end
+    if enabled.bounty then table.insert(fields, {name = "Bounty / Honor", value = "`" .. data.bounty .. "`", inline = true}) end
+    if enabled.level then table.insert(fields, {name = "Level", value = "`" .. data.level .. "`", inline = true}) end
+    if enabled.money then table.insert(fields, {name = "Beli", value = "`" .. data.money .. "`", inline = true}) end
+    if enabled.fragments then table.insert(fields, {name = "Fragments", value = "`" .. data.fragments .. "`", inline = true}) end
+    if enabled.race then table.insert(fields, {name = "Race", value = "`" .. data.race .. "`", inline = true}) end
+    if enabled.fruit then table.insert(fields, {name = "Devil Fruit", value = "`" .. data.fruit .. "`", inline = true}) end
 
     local message = {
         embeds = {{
