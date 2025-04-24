@@ -3,7 +3,6 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local request = (syn and syn.request) or (http and http.request) or request
 
--- ✅ ใช้คอนฟิกจาก _G
 local config = _G.BloxFruitsWebhookConfig or {}
 if not config.webhookURL then
     warn("❌ ไม่พบ webhookURL ใน config")
@@ -14,14 +13,13 @@ if not request then
     return
 end
 
--- 🧠 Fighting Styles
+-- รายชื่อหมัดทั้งหมดที่รองรับ
 _G.AllOwnedFightingStyles = {
     "Combat", "Black Leg", "Electro", "Water Kung Fu",
     "Dragon Breath", "Superhuman", "Death Step", "Electric Claw",
     "Sharkman Karate", "Godhuman", "Dragon Talon", "Sanguine Art"
 }
 
--- ✅ ตรวจสอบว่าหมัดมีจริงในเกมไหม
 local function verifyOwnedFightingStyles()
     local valid = {}
     local cache = game:FindFirstChild("WeaponAssetCache")
@@ -50,7 +48,6 @@ local function verifyOwnedFightingStyles()
     return #valid > 0 and table.concat(valid, ", ") or "❌ No valid fighting styles found"
 end
 
--- 👤 ข้อมูลผู้เล่น
 local function getPlayerData()
     local data = LocalPlayer:FindFirstChild("Data")
     local stats = LocalPlayer:FindFirstChild("leaderstats")
@@ -83,20 +80,19 @@ local function getPlayerData()
     }
 end
 
--- 🚀 ส่งข้อมูลไปยัง Webhook
 local function sendToWebhook()
     local playerData = getPlayerData()
     local fields = {}
 
     local nameField = config.hideUsername and ("||`" .. playerData.name .. "`||") or ("`" .. playerData.name .. "`")
-    table.insert(fields, {name = " Player Name", value = nameField, inline = true})
-    if config.showBounty then table.insert(fields, {name = " Bounty / Honor", value = "`" .. playerData.bounty .. "`", inline = true}) end
-    if config.showLevel then table.insert(fields, {name = " Level", value = "`" .. playerData.level .. "`", inline = true}) end
-    if config.showMoney then table.insert(fields, {name = " Money", value = "`" .. playerData.money .. "`", inline = true}) end
-    if config.showFragments then table.insert(fields, {name = " Fragments", value = "`" .. playerData.fragments .. "`", inline = true}) end
-    if config.showRace then table.insert(fields, {name = " Race", value = "`" .. playerData.race .. "`", inline = true}) end
-    if config.showFruit then table.insert(fields, {name = " Devil Fruit", value = "`" .. playerData.fruit .. "`", inline = true}) end
-    if config.showFightingStyle then table.insert(fields, {name = " Melee", value = verifyOwnedFightingStyles(), inline = false}) end
+    table.insert(fields, {name = "Player Name", value = nameField, inline = true})
+    if config.showBounty then table.insert(fields, {name = "Bounty / Honor", value = "`" .. playerData.bounty .. "`", inline = true}) end
+    if config.showLevel then table.insert(fields, {name = "Level", value = "`" .. playerData.level .. "`", inline = true}) end
+    if config.showMoney then table.insert(fields, {name = "Money", value = "`" .. playerData.money .. "`", inline = true}) end
+    if config.showFragments then table.insert(fields, {name = "Fragments", value = "`" .. playerData.fragments .. "`", inline = true}) end
+    if config.showRace then table.insert(fields, {name = "Race", value = "`" .. playerData.race .. "`", inline = true}) end
+    if config.showFruit then table.insert(fields, {name = "Devil Fruit", value = "`" .. playerData.fruit .. "`", inline = true}) end
+    if config.showFightingStyle then table.insert(fields, {name = "Melee", value = verifyOwnedFightingStyles(), inline = false}) end
 
     local embed = {
         title = "⚓ Blox Fruits - Player Info",
@@ -129,6 +125,5 @@ local function sendToWebhook()
     end
 end
 
--- 🔁 รันทันที แล้ววนซ้ำทุก 30 วินาที
 sendToWebhook()
 while true do wait(30) sendToWebhook() end
